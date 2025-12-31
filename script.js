@@ -42,6 +42,92 @@ function startCountdown() {
       `${hrs}h ${mins}m ${secs}s (Lagos time 🇳🇬)`;
   }, 1000);
 }
+function changeBackground() {
+  const body = document.body;
+  // night → fireworks → sunrise
+  setTimeout(() => body.style.background = "linear-gradient(135deg, #0b0712, #1b1b40)", 0);
+  setTimeout(() => body.style.background = "linear-gradient(135deg, #ff5f6d, #ffc371)", 3000); // fireworks color
+  setTimeout(() => body.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)", 7000); // sunrise
+}
+
+// Call after countdown hits zero
+setTimeout(changeBackground, 500);
+const messages = [
+  "I Love You Omotola ❤️",
+  "You are my sunshine ☀️",
+  "My heart beats for you ❤️",
+  "Happy New Year, my love 🎆",
+  "Forever yours, always 💖"
+];
+
+let msgIndex = 0;
+let charIndex = 0;
+
+function typeMessages() {
+  const el = document.getElementById("typingText");
+  if(msgIndex >= messages.length) return;
+  
+  if(charIndex < messages[msgIndex].length) {
+    el.innerHTML += messages[msgIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeMessages, 120);
+  } else {
+    // wait 1s, clear text, go to next message
+    setTimeout(() => {
+      el.innerHTML = "";
+      charIndex = 0;
+      msgIndex++;
+      typeMessages();
+    }, 1000);
+  }
+}
+
+// Call after showing surprise
+typeMessages();
+
+function createSnow() {
+  const snowContainer = document.getElementById("snow");
+  for (let i = 0; i < 10; i++) { // fewer flakes
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+    snowflake.style.left = Math.random() * 100 + "vw";
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + "px"; // smaller flakes
+    snowflake.style.animationDuration = (Math.random() * 8 + 6) + "s"; // slower fall
+    snowflake.innerText = "❄";
+    snowContainer.appendChild(snowflake);
+
+    // Remove after animation ends
+    snowflake.addEventListener("animationend", () => snowflake.remove());
+  }
+}
+
+// Generate new snowflakes every 800ms (less frequent)
+setInterval(createSnow, 800);
+// Function to generate particles in text shape
+function fireworkText(text, x, y) {
+  const offCanvas = document.createElement("canvas");
+  offCanvas.width = canvas.width;
+  offCanvas.height = canvas.height;
+  const offCtx = offCanvas.getContext("2d");
+
+  offCtx.font = "bold 80px Poppins";
+  offCtx.fillText(text, x, y);
+
+  const imageData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imageData.data;
+
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i + 3] > 128) { // pixel alpha > 128
+      const px = (i / 4) % canvas.width;
+      const py = Math.floor(i / 4 / canvas.width);
+      createFirework(px, py, `hsl(${Math.random() * 360},100%,70%)`);
+    }
+  }
+}
+
+// Trigger example
+setTimeout(() => fireworkText("OMOTOLA ❤️", canvas.width/2 - 250, canvas.height/2), 2000);
+
 
 
 /* FIREWORKS */

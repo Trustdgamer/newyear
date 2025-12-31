@@ -159,15 +159,32 @@ section {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-image: url("https://i.imgur.com/Mb3n7Gk.png");
-  animation: snow 20s linear infinite;
-  opacity: 0.7;
+  z-index: 50;
+  overflow: hidden;
 }
 
-@keyframes snow {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 1000px; }
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0.8;
+  user-select: none;
+  animation: fall linear infinite;
 }
+
+@keyframes fall {
+  0% { transform: translateY(-10px) translateX(0); opacity:0.8; }
+  100% { transform: translateY(100vh) translateX(20px); opacity:0.5; }
+}
+body {
+  transition: background 3s ease;
+  background: linear-gradient(135deg, #0b0712, #1b1b40); /* night start */
+}
+
+
+
+
 #typingText {
   font-size: 2.5rem;
   min-height: 60px;
