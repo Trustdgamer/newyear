@@ -1,0 +1,239 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  text-align: center;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+section {
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+video {
+  width: 90%;
+  max-width: 500px;
+  border-radius: 15px;
+}
+#reindeer {
+  position: fixed;
+  bottom: 20px;
+  left: -200px;
+  width: 160px;
+  animation: reindeerRun 25s linear infinite;
+  z-index: 199;
+  pointer-events: none;
+}
+
+@keyframes reindeerRun {
+  0% { left: -200px; }
+  100% { left: 110%; }
+}
+#snowPile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(#fff, #eaeaea);
+  z-index: 5;
+}
+#tree {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 200px;      /* BIG tree */
+  z-index: 200;
+  pointer-events: none;
+}
+
+#toast {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75);
+  padding: 14px 22px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.95rem;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 300;
+}
+
+#toast.show {
+  opacity: 1;
+  bottom: 140px;
+}
+
+
+#fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+  display: none;
+}
+#santa {
+  position: fixed;
+  bottom: 15px;
+  left: -150px;
+  width: 110px;
+  animation: santaWalk 20s linear infinite;
+  z-index: 200;
+  pointer-events: none;
+}
+
+@keyframes santaWalk {
+  0% { left: -150px; }
+  100% { left: 110%; }
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+section {
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("https://i.imgur.com/Mb3n7Gk.png");
+  animation: snow 20s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes snow {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 1000px; }
+}
+#typingText {
+  font-size: 2.5rem;
+  min-height: 60px;
+}
+
+.fromText {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.finalNote {
+  margin-top: 30px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+@media (max-width: 600px) {
+  #typingText {
+    font-size: 2rem;
+  }
+}
+
+#gift {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  font-size: 3rem;
+  cursor: pointer;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+
+#timer {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+@media (max-width: 600px) {
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  section {
+    padding: 40px 15px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+
+  #timer {
+    font-size: 1.6rem;
+  }
+
+  video {
+    width: 100%;
+  }
+
+  #santa {
+    width: 90px;
+    bottom: 10px;
+  }
+}
