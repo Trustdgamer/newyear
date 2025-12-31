@@ -104,29 +104,9 @@ function createSnow() {
 // Generate new snowflakes every 800ms (less frequent)
 setInterval(createSnow, 800);
 // Function to generate particles in text shape
-function fireworkText(text, x, y) {
-  const offCanvas = document.createElement("canvas");
-  offCanvas.width = canvas.width;
-  offCanvas.height = canvas.height;
-  const offCtx = offCanvas.getContext("2d");
 
-  offCtx.font = "bold 80px Poppins";
-  offCtx.fillText(text, x, y);
 
-  const imageData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = imageData.data;
 
-  for (let i = 0; i < data.length; i += 4) {
-    if (data[i + 3] > 128) { // pixel alpha > 128
-      const px = (i / 4) % canvas.width;
-      const py = Math.floor(i / 4 / canvas.width);
-      createFirework(px, py, `hsl(${Math.random() * 360},100%,70%)`);
-    }
-  }
-}
-
-// Trigger example
-setTimeout(() => fireworkText("OMOTOLA ❤️", canvas.width/2 - 250, canvas.height/2), 2000);
 
 
 
