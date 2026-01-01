@@ -51,7 +51,7 @@ function changeBackground() {
 }
 
 // Call after countdown hits zero
-setTimeout(changeBackground, 500);
+setTimeout(changeBackground, 1000);
 const messages = [
   "I Love You Omotola ❤️",
   "You are my sunshine ☀️",
@@ -104,7 +104,59 @@ function createSnow() {
 // Generate new snowflakes every 800ms (less frequent)
 setInterval(createSnow, 800);
 // Function to generate particles in text shape
+let slideIndex = 0;
 
+function showSlides() {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach(slide => slide.style.display = "none");
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 4000); // change slide every 4 seconds
+}
+
+// Call when gallery is shown
+function startGallerySlideshow() {
+  showSlides();
+}
+
+let videoSlides = document.querySelectorAll(".video-carousel video");
+let videoIndex = 0;
+
+function showVideoSlides() {
+  videoSlides.forEach(v => v.style.display = "none");
+  videoIndex++;
+  if(videoIndex > videoSlides.length) videoIndex = 1;
+  videoSlides[videoIndex-1].style.display = "block";
+  setTimeout(showVideoSlides, 5000); // change every 5 seconds
+}
+
+// Call this when showing the video section
+showVideoSlides();
+
+
+function createLightParticles() {
+  const light = document.createElement("div");
+  light.className = "lightParticle";
+  light.style.left = Math.random() * 100 + "vw";
+  light.style.top = Math.random() * 80 + "vh";
+  light.style.width = Math.random()*15+5 + "px";
+  light.style.height = light.style.width;
+  light.style.background = "rgba(255,255,255,0.7)";
+  light.style.borderRadius = "50%";
+  light.style.position = "fixed";
+  light.style.pointerEvents = "none";
+  light.style.zIndex = 30;
+  document.body.appendChild(light);
+
+  light.animate([
+    {transform: `translateY(0px)`, opacity: 0.7},
+    {transform: `translateY(-30px)`, opacity: 0}
+  ], {duration: 4000, iterations: Infinity});
+
+  setTimeout(() => light.remove(), 4000);
+}
+setInterval(createLightParticles, 600);
 
 
 

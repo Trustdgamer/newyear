@@ -182,6 +182,50 @@ body {
   background: linear-gradient(135deg, #0b0712, #1b1b40); /* night start */
 }
 
+.slideshow-container {
+  position: relative;
+  max-width: 90%;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.slide {
+  display: none;
+  animation: fade 1s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.video-carousel {
+  display: flex;
+  overflow-x: auto;  /* scroll horizontally */
+  gap: 15px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.video-carousel video {
+  flex: 0 0 250px;  /* each video takes 250px width */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.video-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.video-carousel::-webkit-scrollbar-thumb {
+  background: #ff4d6d;
+  border-radius: 4px;
+}
 
 
 
