@@ -70,7 +70,7 @@ function typeMessages() {
   if(charIndex < messages[msgIndex].length) {
     el.innerHTML += messages[msgIndex].charAt(charIndex);
     charIndex++;
-    setTimeout(typeMessages, 120);
+    setTimeout(typeMessages, 500);
   } else {
     // wait 1s, clear text, go to next message
     setTimeout(() => {
@@ -85,24 +85,50 @@ function typeMessages() {
 // Call after showing surprise
 typeMessages();
 
-function createSnow() {
-  const snowContainer = document.getElementById("snow");
-  for (let i = 0; i < 10; i++) { // fewer flakes
-    const snowflake = document.createElement("div");
-    snowflake.classList.add("snowflake");
-    snowflake.style.left = Math.random() * 100 + "vw";
-    snowflake.style.fontSize = (Math.random() * 10 + 10) + "px"; // smaller flakes
-    snowflake.style.animationDuration = (Math.random() * 8 + 6) + "s"; // slower fall
-    snowflake.innerText = "❄";
-    snowContainer.appendChild(snowflake);
+const snowContainer = document.getElementById("snow");
+const snowCount = 30; // total flakes
+const snowflakes = [];
 
-    // Remove after animation ends
-    snowflake.addEventListener("animationend", () => snowflake.remove());
-  }
+// Initialize snowflakes
+for (let i = 0; i < snowCount; i++) {
+  const flake = document.createElement("div");
+  flake.classList.add("snowflake");
+  flake.style.left = Math.random() * 100 + "vw";
+  flake.style.top = Math.random() * 100 + "vh";
+  flake.style.fontSize = (Math.random() * 10 + 10) + "px"; // smaller flakes
+  flake.style.opacity = Math.random() * 0.8 + 0.2;
+  flake.style.position = "absolute";
+  flake.style.pointerEvents = "none";
+  flake.innerText = "❄";
+  snowContainer.appendChild(flake);
+  snowflakes.push(flake);
 }
 
-// Generate new snowflakes every 800ms (less frequent)
-setInterval(createSnow, 800);
+// Animate snowflakes smoothly
+function animateSnow() {
+  snowflakes.forEach(flake => {
+    let top = parseFloat(flake.style.top);
+    let left = parseFloat(flake.style.left);
+
+    top += Math.random() * 0.5 + 0.3; // speed
+    left += Math.sin(Date.now() / 1000 + top) * 0.3; // gentle horizontal drift
+
+    if (top > 100) top = -5; // recycle at top
+    if (left > 100) left = 0;
+    if (left < 0) left = 100;
+
+    flake.style.top = top + "vh";
+    flake.style.left = left + "vw";
+  });
+
+  requestAnimationFrame(animateSnow);
+}
+
+animateSnow();
+
+
+
+
 // Function to generate particles in text shape
 let slideIndex = 0;
 
@@ -288,13 +314,13 @@ setInterval(() => {
   heart.style.position = "fixed";
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.bottom = "0px";
-  heart.style.fontSize = "22px";
+  heart.style.fontSize = "24px";
   heart.style.animation = "floatUp 4s linear";
-  heart.style.pointerEvents = "none";
   document.body.appendChild(heart);
 
   setTimeout(() => heart.remove(), 4000);
-}, 900);
+}, 800);
+
 
 /* GIFT MESSAGE */
 
